@@ -24,7 +24,7 @@ Modal.setAppElement("#root");
 
 export default function Layout() {
 
-  const {user, error} = useAuth({middleware: 'auth'});
+  useAuth({middleware: 'auth'});
   const {modal} = useQuiosco();
 
   // console.log(user);
@@ -34,12 +34,12 @@ export default function Layout() {
   return (
     <>
       <div className="md:flex">
-          <Sidebar />
-          <main className="flex-1 h-screen overflow-y-scroll bg-gray-100 p-3">
-            <Outlet />
-          </main>
+        <Sidebar />
+        <main className="flex-1 h-screen overflow-y-scroll bg-gray-100 p-3">
+          <Outlet />
+        </main>
 
-          <Resumen />
+        <Resumen />
 
       </div>
 

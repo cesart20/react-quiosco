@@ -2,9 +2,9 @@
 import { formatearDinero } from "../helpers";
 import useQuiosco from "../hooks/useQuiosco";
 
-export default function Producto({producto}) {
+export default function Producto({producto, botonAgregar = false, botonDisponible = false}) {
 
-    const {handleClickModal, handleSetProducto} = useQuiosco();
+    const {handleClickModal, handleSetProducto, handleClickProductoAgotado} = useQuiosco();
     const { nombre, precio, imagen} = producto;
     
 
@@ -24,16 +24,32 @@ export default function Producto({producto}) {
                 {formatearDinero(precio)}
             </p>
 
-            <button
-                onClick={() => {
+            {
+                botonAgregar && (
+                    <button
+                    onClick={() => {
                     handleClickModal()
                     handleSetProducto(producto);
-                }}
-                type="button"
-                className="bg-indigo-600 hover:bg-indigo-800 text-white w-full font-bold p-3 mt-5 uppercase"
-            >
-                Agregar
-            </button>
+                    }}
+                    type="button"
+                    className="bg-indigo-600 hover:bg-indigo-800 text-white w-full font-bold p-3 mt-5 uppercase"
+                >
+                    Agregar
+                </button>
+                )
+            }
+            {
+                botonDisponible && (
+                    <button
+                    onClick={() => {handleClickProductoAgotado(producto.id)}}
+                    type="button"
+                    className="bg-indigo-600 hover:bg-indigo-800 text-white w-full font-bold p-3 mt-5 uppercase"
+                    >
+                        Producto Agotado
+                    </button>
+                )
+            }
+            
         </div>
     </div>
   )
